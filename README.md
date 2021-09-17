@@ -66,46 +66,26 @@ tutorial, [you'll love the book, which contains 80% more content!](http://www.sp
 Introduction
 ------------
 
-Pixi is an extremely fast 2D sprite rendering engine. What does that
-mean? It means that it helps you to display, animate and manage
-interactive graphics so that it's easy for you to make games and
-applications using
-JavaScript and other HTML5 technologies. It has a sensible,
-uncluttered API and includes many useful features, like supporting
-texture atlases and providing a streamlined system for animating
-sprites (interactive images). It also gives you a complete scene graph so that you can
-create hierarchies of nested sprites (sprites inside sprites), as well
-as letting you attach mouse and touch events directly to sprites. And,
-most
-importantly, Pixi gets out of your way so that you can use as much or
-as little of it as you want to, adapt it to your personal coding
-style, and integrate it seamlessly with other useful frameworks.
+Pixi는 매우 빠른 2D 스프라이트 렌더링 엔진이다. 그게 무슨 의미일까?
+인터렉티브한 그래픽을 보여주고 애니메이션화하고 관리할 수 있도록 함으로써 우리가 JavaScript 및 기타 HTML5 기술을 사용하여 게임과 어플리케이션을 쉽게 만들 수 있게 도와준다.
 
-Pixi’s API is actually a refinement of a well-worn and battle-tested
-API pioneered by Macromedia/Adobe Flash. Old-skool Flash developers
-will feel right at home. Other current sprite rendering frameworks use
-a similar API: CreateJS, Starling, Sparrow and Apple’s SpriteKit. The
-strength of Pixi’s API is that it’s general-purpose: it’s not a game
-engine. That’s good because it gives you total expressive freedom to make anything you like, and wrap your own custom game engine around it.
+Pixi는 합리적이고 깔끔한 API를 갖추고 있으며 텍스처 아틀라스를 지원하거나 스프라이트 애니메이션(인터랙티브 이미지)을 위한 효율적인 시스템을 제공하는 등 많은 유용한 기능을 포함한다. 또한 중첩된 스프라이트(스프라이트 내부의 스프라이트)의 계층 구조를 만들 수 있도록 전체적인 씬 그래프(Scene Graph)를 제공한다. 스프라이트에 마우스 및 터치 이벤트를 직접 연동할 수도 있다.
 
-In this tutorial you’re going to find out how to combine Pixi’s
-powerful image rendering features and scene graph to start making
-games. But Pixi isn't just for games - you can use these same
-techniques to create any interactive media applications. That means
-apps for phones!
+그리고 가장 중요한 것은 여러분이 원하는 만큼 - 최대한 혹은 최소한 - 사용할 수 있고, 개인 코딩 스타일에 맞게 조정하고, 다른 유용한 프레임워크와 완벽하게 통합할 수 있다는 것이다.
 
-What do you need to know before you get started with this tutorial?
+Pixi의 API는 Macromedia/Adobe Flash가 선도했던 오랫동안 쓰여왔고 실전에서 많이 굴러본 API를 개선하고 다듬은 것이다. 플래시 개발자들은 편안함을 느낄 것이다. 다른 현존하는 스프라이트 렌더링 프레임워크 - CreateJS, Starling, Sparrow 및 애플의 스프라이트킷 - 도 유사한 API를 사용한다. Pixi API의 강점은 범용성이다: 하지만 Pixi는 게임 엔진이 아니다. 그렇기에 여러분은 무엇이든 만들 수 있는 전적인 표현의 자유를 가지게 되고, 여러분만의 커스텀 게임 엔진으로 래핑할 수도 있다.
 
-You should have a reasonable understanding of HTML and
-JavaScript. You don't have to be an expert, just an ambitious beginner
-with an eagerness to learn. If you don't know HTML and JavaScript, the
-best place to start learning it is this book:
+이 튜토리얼에서는 Pixi의 강력한 이미지 렌더링 기능과 씬 그래프를 결합하여 게임을 만드는 방법에 대해 알아본다. 하지만 Pixi는 단지 게임만을 위한 것이 아니다. 여러분은 어떤 인터렉티브 미디어 어플리케이션을 만들던지 이와 같은 기술을 사용할 수 있다. 핸드폰 앱도 마찬가지!
+
+이 튜토리얼을 시작하기 전에 알아야 할 사항은 무엇일까?
+
+당신은 HTML와 Javascript를 어느 정도 이해하고 있어야 한다. 전문가일 필요는 없고, 단지 배우려는 열망을 가진 야심찬 초보여도 괜찮다. HTML과 자바스크립트를 모르면, 이 책을 먼저 읽는 것을 추천한다.
 
 [Foundation Game Design with HTML5 and JavaScript](http://www.apress.com/9781430247166)
 
-I know for a fact that it's the best book, because I wrote it!
+나는 이 책이 최고라고 장담한다. 왜냐하면 내가 썼거든!
 
-There are also some good internet resources to help get you started:
+또한 시작하는 데 도움이 되는 몇 가지 유용한 인터넷 자료도 있다.
 
 [Khan Academy: Computer
 Programming](http://www.khanacademy.org/computing/cs)
@@ -113,7 +93,7 @@ Programming](http://www.khanacademy.org/computing/cs)
 [Code Academy:
 JavaScript](http://www.codecademy.com/tracks/javascript)
 
-Choose whichever best suits your learning style.
+당신의 학습 스타일에 가장 적합한 것을 선택하길 바란다.
 
 Ok, got it?
 Do you know what JavaScript variables, functions, arrays and objects are and how to
