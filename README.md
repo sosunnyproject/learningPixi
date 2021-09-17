@@ -95,34 +95,16 @@ JavaScript](http://www.codecademy.com/tracks/javascript)
 
 당신의 학습 스타일에 가장 적합한 것을 선택하길 바란다.
 
-Ok, got it?
-Do you know what JavaScript variables, functions, arrays and objects are and how to
-use them? Do you know what [JSON data
-files](http://www.copterlabs.com/blog/json-what-it-is-how-it-works-how-to-use-it/)
-are? Have you used the [Canvas Drawing API](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Drawing_graphics_with_canvas)?
+이제 준비가 되었나? 
+자바스크립트 변수, 함수, 배열, 객체가 무엇인지 그리고 그것들을 어떻게 사용하는지 알고 있는가? [JSON 데이터 파일](http://www.copterlabs.com/blog/json-what-it-is-how-it-works-how-to-use-it/)이 무엇인지 아는가? [캔버스 드로잉 API](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Drawing_graphics_with_canvas)를 써본 적이 있는가? 
 
-To use Pixi, you'll also need to run a webserver in your root project
-directory. Do you know what a webserver is and
-how to launch one in your project folder? The best way is to use
-[node.js](http://nodejs.org) and then to install the extremely easy to use
-[http-server](https://github.com/nodeapps/http-server). However, you need to be comfortable working with the Unix
-command line if you want to do that. You can learn how to use
-Unix [in this
-video](https://www.youtube.com/watch?feature=player_embedded&v=cX9ASUE3YAQ)
-and, when you're finished, follow it with [this
-video](https://www.youtube.com/watch?v=INk0ATBbclc). You should learn
-how to use Unix - it only takes a couple of hours to learn and is a
-really fun and easy way to interact with your computer.
+Pixi를 사용하려면 루트 프로젝트에서 웹 서버를 실행해야 한다. 웹 서버가 무엇인지, 어떻게 당신의 프로젝트 폴더에서 웹 서버를 실행하는지 알고 있는가? 최고의 방법은 [node.js](http://nodejs.org)를 사용하고, 매우 간편한 [http-server](https://github.com/nodeapps/http-server)를 설치하는 것이다. 하지만 당신은 Unix 커맨드 라인을 치는 것에 어느 정도 익숙해야 한다. Unix를 어떻게 사용하는지는 [이 비디오](https://www.youtube.com/watch?feature=player_embedded&v=cX9ASUE3YAQ)에서 배울 수 있다. 다 보았다면, [이 영상](https://www.youtube.com/watch?v=INk0ATBbclc)도 추천한다. Unix를 어떻게 사용하는 지는 꼭 배우길 바란다. 배우는 데 몇시간 정도밖에 안 걸리고 당신의 컴퓨터와 소통하는 엄청 재미있고 쉬운 방법이다.
 
-But if you don't want to mess around with the command line just yet, try the [Mongoose](http://cesanta.com/)
-webserver:
+하지만 그래도 커맨드 라인이 아직 편하지 않으면 [Mongoose](http://cesanta.com/) 웹 서버를 시도해보라.
 
-Or, just write all your code using the excellent [Brackets text
-editor](http://brackets.io). Brackets automatically launches a webserver
-and browser for you when you click the lightning bolt button in its
-main workspace.
+아니면, 당신의 모든 코드를 완전짱짱 [Brackets text editor](http://brackets.io)에서 작성하라. 메인 워크스페이스에서 번개 버튼만 누르면 Brackets가 자동으로 웹서버와 브라우저를 실행해준다. 
 
-Now if you think you're ready, read on!
+이제 정말 준비가 되었다면, 읽어보자!
 
 (Request to readers: this is a *living document*. If you have any
 questions about specific details or need any of the content clarified, please
