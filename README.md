@@ -194,11 +194,11 @@ document.body.appendChild(app.view);
 `PIXI.Application`의 하나뿐인 argument (파라미터/인자)는 `options`라는 단일 오브젝트이다. 이 예제에서는 `options`의 `width`와 `height`프로퍼티가 canvas의 너비와 높이(픽셀)를 결정하도록 되어있다. 여러분은 이 `options` 오브젝트에 여러가지 선택적인 프로퍼티를 지정할 수 있다; 안티앨리어싱, 투명도, 해상도 등을 아래처럼 설정할 수 있다:
 ```js
 const app = new PIXI.Application({ 
-    width: 256,         // default: 800
-    height: 256,        // default: 600
-    antialias: true,    // default: false
-    transparent: false, // default: false
-    resolution: 1       // default: 1
+    width: 256,         // 기본값: 800
+    height: 256,        // 기본값: 600
+    antialias: true,    // 기본값: false
+    transparent: false, // 기본값: false
+    resolution: 1       // 기본값: 1
   }
 );
 ```
@@ -233,7 +233,7 @@ app.renderer.view.style.display = "block";
 app.renderer.autoDensity = true;
 app.resizeTo = window;
 ```
-그러나, 만약 당신이 그렇게 한다면, 이 CSS 코드와 함께 모든 HTML 요소에 기본 패딩과 마진을 0으로 설정해야 한다:
+그러나, 만약 당신이 그렇게 한다면, 이 CSS 코드로 모든 HTML 요소에 기본 패딩과 마진을 0으로 설정해야 한다:
 ```html
 <style>* {padding: 0; margin: 0}</style>
 ```
@@ -245,20 +245,16 @@ app.resizeTo = window;
 ### Pixi 스프라이트
 ------------
 
-Now that you have a renderer, you can start adding images to it. Anything you want to be made visible in the renderer has to be added to a special Pixi object called the `stage`. You can access this special `stage` object like this:
+렌더러가 있으니 이제 이미지를 추가할 수 있다. 렌더러를 통해 보여주고 싶은 게 있다면, 반드시 `stage`라는 특별한 Pixi 오브젝트에 추가해야 한다. 이 특별한 `stage` 오브젝트는 아래처럼 접근할 수 있다:
 ```js
 app.stage
 ```
-The `stage` is a Pixi `Container` object. You can think of a container
-as a kind of empty box that will group together and store whatever you
-put inside it. The `stage` object is the root container for all the visible
-things in your scene. Whatever you put inside the `stage` will be
-rendered on the canvas. Right now the `stage` is empty, but soon we're going to
-start putting things inside it. (You can read more about Pixi's `Container` objects [here](http://pixijs.download/v5.3.10/docs/PIXI.Container.html)).
+`stage`는 Pixi `Container` 오브젝트이다. 이 컨테이너는 그냥 비어있는 박스이고 여러분이 넣는 무엇이든 담거나 그룹화한다고 생각하면 된다. `stage` 오브젝트는 씬에 직접적으로 보이는 모든 것들의 루트 컨테이너이다. `stage`에 무엇을 넣든 간에 모두 캔버스에 그려진다. 지금은 `stage`가 비어 있지만, 이제 곧 안에 무언가를 넣기 시작할 것이다. (Pixi의 `Container` 오브젝트에 대해서는 [여기](http://pixijs.download/v5.3.10/docs/PIXI.Container.html)에서 자세하게 읽어볼 수 있다).
 
 (Important: because the `stage` is a Pixi `Container` it has the same properties and methods as any other `Container` object. But, although the `stage` has `width` and `height` properties, *they don't refer to
 the size of the rendering window*. The stage's `width` and `height`
 properties just tell you the area occupied by the things you put inside it - more on that ahead!)
+(중요: `stage`는 픽시 `Container`이기 때문에 다른 `Container` 객체와 동일한 프로퍼티와 메소드를 가지고 있다. 단, `stage`에는 `width`와 `height` 프로퍼티가 있지만 *그 값들이 렌더링하는 윈도우의 크기를 가리키지는 않는다.* stage의 `width`와 `height` 프로퍼티는 그 안에 넣은 것들이 차지하는 면적을 알려줄 뿐이다. 나중에 더 자세한 설명을 할 것이다.)
 
 So what do you put on the stage? Special image objects called
 **sprites**. Sprites are basically just images that you can control
@@ -268,20 +264,21 @@ important thing about learning to use Pixi. If you know how to make
 sprites and add them to the stage, you're just a small step away from
 starting to make games.
 
-Pixi has a `Sprite` class that is a versatile way to make game
-sprites. There are three main ways to create them:
+그러면 'stage'에 무엇을 넣을까? **sprites**라고 하는 특별한 이미지 객체가 있다. 스프라이트는 여러분이 코드로 제어할 수 있는 이미지이다. 인터렉티브하거나 움직이는 그래픽을 만드는 데 유용한 위치, 크기 및 기타 프로퍼티를 제어할 수 있다. 스프라이트를 만들고 조절하는 법을 배우는 것은 Pixi를 배우는 데 있어 가장 중요한 것이다. 스프라이트를 만들어 stage에 추가하는 방법을 안다면 게임을 만들 수 있는 레벨에 거의 도달한 것이다. 
 
-- From a single image file.
-- From a sub-image on a **tileset**. A tileset is a single, big image that
-includes all the images you'll need in your game.
-- From a **texture atlas** (A JSON file that defines the size and position of an image on a tileset.)
+Pixi에는 게임 스프라이트를 다양하게 만들 수 있는 `Sprite` 클래스가 있다. 스프라이트를 만드는 데에는 크게 3가지 방법이 있다:
+
+- 이미지 파일 하나.
+- **tileset**의 부속 이미지. tileset란 여러분의 게임에 필요한 모든 이미지를 합친 하나의 거대한 이미지를 말한다.
+- **texture atlas** 텍스쳐 아틀라스. (tileset의 이미지 사이즈와 위치를 지정하는 JSON 파일)
 
 You’re going to learn all three ways, but, before you do, let’s find
 out what you need to know about images before you can display them
 with Pixi.
+세 가지 방법을 모두 배우게 되겠지만, 배우기에 앞서 Pixi로 이미지를 표시하기 전에 이미지에 대해 알아야 할 사항을 알아보자.
 
 <a id='loading'></a>
-Loading images into the texture cache
+텍스쳐 캐시(texture cache)에 이미지 로드하기
 -------------------------------------
 
 Because Pixi renders the image on the GPU with WebGL, the image needs
@@ -428,37 +425,30 @@ But usually setting a sprite’s `visible` property to `false` will be a simpler
 anySprite.visible = false;
 ```
 <a id='usingaliases'></a>
-### Using aliases
+### 별칭(앨리어스) 사용하기
 
-You can save yourself a little typing and make your code more readable
-by creating short-form aliases for the Pixi objects and methods that you
-use frequently. For example, is prefixing `PIXI` to all of Pixi's objects starting to bog you down? If you think so, create a shorter alias that points to it. For example, here's how you can create an alias to the `TextureCache` object:
+자주 사용하는 Pixi 객체와 메소드의 별칭을 만들면 타이핑을 줄이고 코드를 더 읽기 쉽게 만들 수 있다. 예를 들어, 모든 Pixi 객체에 접두사 'PIXI'를 붙이려니 숨이 막히는가? 그렇다면 Pixi를 가리키는 더 짧은 별칭을 만들어보자. 예를 들어, 'TextureCache' 객체의 별칭을 만드는 방법은 다음과 같다.
+
 ```js
 const TextureCache = PIXI.utils.TextureCache;
 ```
-Then, use that alias in place of the original, like this:
+그리고 그 별칭을 원래 스트링 자리에 이렇게 쓴다.
 ```js
 const texture = TextureCache["images/cat.png"];
 ```
-In addition to letting you write slightly more succinct code, using aliases has
-an extra benefit: it helps to buffer you from Pixi's frequently
-changing API. If Pixi's API changes in future
-versions - which it will! - you just need to update these aliases to
-Pixi objects and methods in one place, at the beginning of
-your program, instead of every instance where they're used throughout
-your code. So when Pixi's development team decides they want to
-rearrange the furniture a bit, you'll be one step ahead of them!
+별칭을 사용하는 것은  당신이 조금 더 간결한 코드를 쓸 수 있게 해 줄 뿐만 아니라 자주 바뀌는 Pixi API로부터 당신을 지켜준다.
 
-To see how to do this, let's re-write the code we wrote to load an image and display it,
-using aliases for all the Pixi objects and methods.
+Pixi의 API가 향후 버전에서 변경된다면 - 실제로 그렇겠지만 - 여러분은 코드 전체에 걸쳐 사용된 모든 인스턴스를 바꾸는 대신, 프로그램 초반에 몰려있는 Pixi 객체와 메소드의 별칭들만 업데이트하면 된다. 그래서 Pixi 개발팀이 약간 재배열하더라도 당신은 그들보다 한 발 앞서 있을 것이다!
+
+어떻게 할 수 있는지 알아보기 위해 위에 썼던 이미지 로딩 코드의 모든 Pixi 객체와 메소드를 별칭으로 바꿔서 다시 써보자.
 ```js
-//Aliases
+// 별칭
 const Application = PIXI.Application,
     loader = PIXI.Loader.shared,
     resources = PIXI.Loader.shared.resources,
     Sprite = PIXI.Sprite;
 
-//Create a Pixi Application
+// Pixi 애플리케이션 생성하기
 const app = new Application({ 
     width: 256, 
     height: 256,                       
@@ -468,7 +458,7 @@ const app = new Application({
   }
 );
 
-//Add the canvas that Pixi automatically created for you to the HTML document
+// Add the canvas that Pixi automatically created for you to the HTML document
 document.body.appendChild(app.view);
 
 //load an image and run the `setup` function when it's done
@@ -487,58 +477,41 @@ function setup() {
 }
 
 ```
-Most of the examples in this tutorial will use aliases for Pixi
-objects that follow this same model. **Unless otherwise stated, you can
-assume that all the code examples that follow use aliases like these**.
 
-This is all you need to know to start loading images and creating
-sprites.
+이 튜토리얼의 예제는 대부분 이런 식으로 Pixi 객체에 별칭을 사용한다. **별도로 명시되지 않은 한, 이어지는 모든 코드 예제는 위와 같은 별칭을 사용한다고 가정할 수 있다.**
+
+이미지를 로드하고 스프라이트를 만들려면 이 정도만 알아도 충분하다.
 
 <a id='alittlemoreaboutloadingthings'></a>
-### A little more about loading things
+### 로더에 대해 좀 더 이야기하자면 
 
-The format I've shown you above is what I suggest you use as your
-standard template for loading images and displaying sprites. So, you
-can safely ignore the next few paragraphs and jump straight to the
-next section, "Positioning sprites." But Pixi's `Loader` object is
-quite sophisticated and includes a few features that you should be
-aware of, even if you don't use them on a regular basis. Let's
-look at some of the most useful.
+위에서 보여드린 형식은 이미지를 로드하고 스프라이트를 그리는 코드의 표준 템플릿으로 사용하길 추천한다. 따라서 다음 몇 단락은 무시하고 다음 섹션인 "스프라이트 배치"로 바로 넘어가도 된다.
+
+그러나 Pixi의 `Loader` 객체는 상당히 정교하고, 자주 사용하지 않더라도 알고 있어야 할 몇 가지 기능을 포함하고 있다. 가장 유용한 것들을 살펴보자.
 
 <a id='makeaspritefromanordinaryjavascriptimageobject'></a>
-#### Make a sprite from an ordinary JavaScript Image object or Canvas
+#### 일반 자바스크립트 이미지 객체나 캔버스에서 스프라이트 만들기 
 
-For optimization and efficiency it’s always best to make a sprite from
-a texture that’s been pre-loaded into Pixi’s texture cache. But if for
-some reason you need to make a texture from a regular JavaScript
-`Image`
-object, you can do that using Pixi’s `BaseTexture` and `Texture`
-classes:
+최적화와 효율성을 위해 항상 Pixi의 텍스처 캐시에 미리 로드된 텍스처로 스프라이트를 만드는 것이 가장 좋다. 그러나 일반 자바스크립트 이미지 오브젝트에서 텍스처를 만들어야 한다면 Pixi의  `BaseTexture`와  `Texture` 클래스를 사용할 수도 있다.
 ```js
 const base = new PIXI.BaseTexture(anyImageObject),
     texture = new PIXI.Texture(base),
     sprite = new PIXI.Sprite(texture);
 ```
-You can use `BaseTexture.from` if you want to make a texture
-from any existing canvas element:
+이미 존재하는 canvas 요소로부터 텍스쳐를 만들고 싶다면 `BaseTexture.from`을 사용한다.
 ```js
 const base = new PIXI.BaseTexture.from(anyCanvasElement);
 ```
-If you want to change the texture the sprite is displaying, use the
-`texture` property. Set it to any `Texture` object, like this:
+스프라이트가 표시하는 질감을 변경하려면 `texture`프로퍼티를 사용한다. 임의의 `Texture` 객체에 다음과 같이 설정한다.
 ```js
 anySprite.texture = PIXI.utils.TextureCache["anyTexture.png"];
 ```
-You can use this technique to interactively change the sprite’s
-appearance if something significant happens to it in the game.
+이 기술을 사용하여 게임에서 중요한 이벤트가 발생할 경우 스프라이트의 모양이 인터렉티브하게 반응하도록 만들 수 있다.
 
 <a id='assigninganametoaloadingfile'></a>
-#### Assigning a name to a loading file
+#### 로딩하는 파일에 이름 지어주기
 
-It's possible to assign a unique name to each resource you want to
-load. Just supply the name (a string) as the first argument in the
-`add` method. For example, here's how to name an image of a cat as
-`catImage`.
+로드할 각 리소스에 고유한 이름을 할당할 수 있다. `add` 메서드의 첫 번째 파라미터로 이름(문자열)을 입력한다. 예를 들어, 고양이의 이미지를 `catImage`로 명명하는 방법은 다음과 같다.
 ```js
 PIXI.Loader.shared
   .add("catImage", "images/cat.png")
@@ -583,9 +556,7 @@ function setup() {
   console.log("setup");
 }
 ```
-Each time one of the files loads, the progress event calls
-`loadProgressHandler` to display "loading" in the console. When all three files have loaded, the `setup`
-function will run. Here's the output of the above code in the console:
+Each time one of the files loads, the progress event calls `loadProgressHandler` to display "loading" in the console. When all three files have loaded, the `setup` function will run. Here's the output of the above code in the console:
 ```js
 loading
 loading
@@ -655,8 +626,7 @@ access the file's raw binary data.)
 #### More about Pixi's Loader
 
 Pixi's `Loader` is ridiculously feature-rich and configurable. Let's
-take a quick bird's-eye view of its usage to
-get you started.
+take a quick bird's-eye view of its usage to get you started.
 
 The loader's chainable `add` method takes 4 basic arguments:
 ```js
@@ -740,8 +710,7 @@ how to position and resize them.
 In the earlier example the cat sprite was added to the stage at
 the top left corner. The cat has an `x` position of
 0 and a `y` position of 0. You can change the position of the cat by
-changing the values of its `x` and `y` properties. Here's how you can center the cat in the stage by
-setting its `x` and `y` property values to 96.
+changing the values of its `x` and `y` properties. Here's how you can center the cat in the stage by setting its `x` and `y` property values to 96.
 ```js
 cat.x = 96;
 cat.y = 96;
@@ -1205,8 +1174,7 @@ Here's what this code displays:
 ![Explorer, dungeon and treasure](/examples/images/screenshots/13.png)
 
 The stage dimensions are 512 by 512 pixels, and you can see in the
-code above that the `app.stage.height` and `app.stage.width` properties are used
-to align the sprites. Here's how the `explorer`'s `y` position is
+code above that the `app.stage.height` and `app.stage.width` properties are used to align the sprites. Here's how the `explorer`'s `y` position is
 vertically centered:
 ```js
 explorer.y = app.stage.height / 2 - explorer.height / 2;
