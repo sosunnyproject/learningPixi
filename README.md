@@ -63,7 +63,7 @@ tutorial, [you'll love the book, which contains 80% more content!](http://www.sp
 25. [Supporting this project](#supportingthisproject)
 
 <a id='introduction'></a>
-Introduction
+### 소개
 ------------
 
 Pixi는 매우 빠른 2D 스프라이트 렌더링 엔진이다. 그게 무슨 의미일까?
@@ -111,36 +111,30 @@ questions about specific details or need any of the content clarified, please
 create an **issue** in this GitHub repository and I'll update the text
 with more information.)
 
+(독자에게 요청: 이것은 *계속 업데이트하는 문서* 입니다. 특정 세부 사항에 대한 질문이 있거나 더 명확한 내용이 필요한 경우 이 GitHub 저장소에 **이슈**를 생성하면 추가적으로 업데이트하겠습니다.)
+
 <a id='settingup'></a>
-Setting up
+### 셋업하기
 ----------
 
-Before you start writing any code, create a folder for your project, and launch a
-webserver in the project's root directory. If you aren't running a
-webserver, Pixi won't work.
+코드 작성을 시작하기 전에 프로젝트 폴더를 만들고 프로젝트의 루트 디렉터리에서 웹 서버를 시작한다. 웹 서버를 실행하지 않으면 Pixi가 작동하지 않는다.
 
-Next, you need to install Pixi. 
+그 다음, Pixi를 설치한다.
 
 <a id='installingpixi'></a>
-### Installing Pixi
+Pixi 설치하기
 
-The version used for this introduction is **v5.3.10**
-and you can find the `pixi.min.js` file either in this repository's `pixi` folder or on [Pixi's release page for v5.3.10](https://github.com/pixijs/pixi.js/releases/tag/v5.3.10).
-Or, you can get the latest version from [Pixi's main release page](https://github.com/pixijs/pixi.js/releases).
+이 튜토리얼에서 쓰는 버전은 **v5.3.10** 이다. `pixi.min.js` 파일은 이 깃헙 저장소의 `pixi` 폴더 혹은 [Pixi v5.3.10 릴리즈 페이지](https://github.com/pixijs/pixi.js/releases/tag/v5.3.10) 에서 찾을 수 있다.
+또는 [Pixi 메인 릴리즈 페이지](https://github.com/pixijs/pixi.js/releases)에서 가장 최신 버전을 받을 수 있다.
 
-This one file is all you need to use Pixi. You can ignore all the
-other files in the repository: **you don't need them.**
+Pixi를 사용하기 위해서는 이 파일 하나만 있으면 된다. 깃헙 리포의 다른 파일들은 없어도 된다: **필요 없음**
 
-Next, create a basic HTML page, and use a
-`<script>` tag to link the
-`pixi.min.js` file that you've just downloaded. The `<script>` tag's `src`
-should be relative to your root directory where your webserver is
-running. Your `<script>` tag might look something like this:
+다음, 기본적인 HTML 페이지를 생성하고, `<script>` 태그로 방금 다운로드 받은 `pixi.min.js` 파일을 연결한다. `<script>` 태그의 `src` 경로는 웹 서버가 실행되고 있는 여러분의 루트 디렉토리를 기준으로 한다. `<script>` 태그는 아마 아래와 같이 작성될 것이다:
 ```html
 <script src="pixi.min.js"></script>
 ```
-Here's a basic HTML page that you could use to link Pixi and test that
-it's working. (This assumes that the `pixi.min.js` is in a subfolder called `pixi`):
+
+Pixi를 연결하고 실행할 수 있는 간단한 HTML 코드이다. (`pixi.min.js` 파일이 `pixi` 폴더 아래에 있다고 가정한다.):
 
 ```html
 <!doctype html>
@@ -163,32 +157,26 @@ it's working. (This assumes that the `pixi.min.js` is in a subfolder called `pix
 </html>
 ```
 
-If Pixi is linking correctly,
-something like this will be displayed in your web browser's JavaScript console by default:
+Pixi가 잘 연결되었다면, 웹 브라우저의 Console 창에 아래와 같은 문구가 보일 것이다:
 ```
       PixiJS 5.3.10 - * WebGL * http://www.pixijs.com/  ♥♥♥ 
 ```
 
 
 <a id='application'></a>
-Creating the Pixi Application and `stage`
+### Pixi 앱 만들고 `스테이지`하기
 -------------------------------
 
-Now you can start using Pixi!
+이제 Pixi를 사용할 수 있다!
 
-But how? 
+하지만 어떻게? 
 
-The first step is to create a rectangular
-display area that you can start displaying images on. Pixi has an
-`Application` object that creates this for you. It
-automatically generates an HTML `<canvas>` element and figures out how
-to display your images on the canvas. You then need to create a
-special Pixi `Container` object called the `stage`. As you'll see
-ahead, this `stage` object is going to be used as the root container
-that holds all the things you want Pixi to display. 
+첫 단계는 이미지를 띄울 수 있는 직사각형의 디스플레이 영역을 만드는 것이다.
+Pixi의 `Application`이라는 오브젝트가 이걸 만들어준다. HTML `<canvas>` 엘리먼트를 자동으로 생성하고 이미지를 canvas에 그린다. 
 
-Here’s the code you need to write to create an `app` Pixi Application
-and `stage`. Add this code to your HTML document between the `<script>` tags:
+그 다음 여러분은 `stage` 라는 특별한 Pixi `Container` 오브젝트를 생성한다. 잠시 후 보겠지만, 이 `stage` 오브젝트는 여러분이 Pixi를 이용해서 그릴 모든 것들을 담는 루트 컨테이너 역할을 한다. 
+
+Pixi 어플리케이션과 `stage`를 만드는 코드이다. 여러분이 작성한 HTML 코드의 `<script>` 태그 내부에 아래 코드를 붙여넣으면 된다:
 ```js
 //Create a Pixi Application
 const app = new PIXI.Application({width: 256, height: 256});
@@ -196,16 +184,14 @@ const app = new PIXI.Application({width: 256, height: 256});
 //Add the canvas that Pixi automatically created for you to the HTML document
 document.body.appendChild(app.view);
 ```
-This is the most basic code you need write to get started using Pixi. 
-It produces a black 256 pixel by 256 pixel canvas element and adds it to your
-HTML document. Here's what this looks like in a browser when you run this code.
 
-![Basic display](/examples/images/screenshots/01.png)
+이것은 Pixi를 시작하기 위해 여러분이 써야 하는 가장 기본적인 코드이다. 이코드는 검은색의 256 x 256 픽셀 캔버스 엘리먼트를 생성하여 HTML 문서에 추가한다. 다음은 이 코드를 실행할 때의 브라우저 모습이다.
 
-Yay, a [black square](http://rampantgames.com/blog/?p=7745)!
+![기본 모습](/examples/images/screenshots/01.png)
 
-`PIXI.Application`'s only argument is a single object called the `options` object. In this example its `width` and `height` properties are set to determine the width and height of the canvas, in pixels. You can set many more optional properties inside this `options` object; here's how you could use it to set anti-aliasing, transparency
-and resolution:
+우왕 [검은색 사각형](http://rampantgames.com/blog/?p=7745)~!
+
+`PIXI.Application`의 하나뿐인 argument (파라미터/인자)는 `options`라는 단일 오브젝트이다. 이 예제에서는 `options`의 `width`와 `height`프로퍼티가 canvas의 너비와 높이(픽셀)를 결정하도록 되어있다. 여러분은 이 `options` 오브젝트에 여러가지 선택적인 프로퍼티를 지정할 수 있다; 안티앨리어싱, 투명도, 해상도 등을 아래처럼 설정할 수 있다:
 ```js
 const app = new PIXI.Application({ 
     width: 256,         // default: 800
@@ -216,63 +202,47 @@ const app = new PIXI.Application({
   }
 );
 ```
-If you're happy with Pixi's default settings, you don't need to set any of these options.
-But, if you need to, see Pixi's documentation on [PIXI.Application](https://pixijs.download/v5.3.10/docs/PIXI.Application.html).
+Pixi의 기본 설정이 마음에 든다면, 이 옵션들은 건드리지 않아도 된다. 하지만 옵션을 따로 설정하고 싶다면, [PIXI.Application](https://pixijs.download/v5.3.10/docs/PIXI.Application.html)에서 문서를 확인하길 바란다.
 
-What do those options do?
-`antialias` smoothes the edges of fonts and graphic primitives. (WebGL
-anti-aliasing isn’t available on all platforms, so you’ll need to test
-this on your game’s target platform.) `transparent` makes the canvas
-background transparent. `resolution` makes it easier to work with
-displays of varying resolutions and pixel densities. Setting
-the resolutions is a little
-outside the scope of this tutorial, but check out [Mat Grove's
-explanation](https://web.archive.org/web/20171203090730/http://www.goodboydigital.com/pixi-js-v2-fastest-2d-webgl-renderer/)
-about how to use `resolution` for all the details. But usually, just keep `resolution`
-at 1 for most projects and you'll be fine. 
+그렇다면 이 다양한 옵션들은 어떤 것을 할까?
+`antialias`는 폰트와 도형 그래픽들의 모서리/엣지를 부드럽게 만들어준다. (WebGL
+안티앨리어싱은 모든 플랫폼에서 지원되는 것은 아니므로 타겟 플랫폼에서 미리 테스트해야 한다.) `transparent`는 캔버스의 배경 투명도를 결정한다. `resolution`은 픽셀 density (밀도)와 여러 해상도에 맞게 조정할 수 있도록 도와준다.
+해상도를 설정하는 건 이 튜토리얼 범위 밖이지만, [Mat Grove's
+explanation](https://web.archive.org/web/20171203090730/http://www.goodboydigital.com/pixi-js-v2-fastest-2d-webgl-renderer/)을 참고하면 디테일을 위해 `resolution`을 어떻게 이용하는지 배울 수 있다. 하지만 보통 대부분의 프로젝트에 `resolution`을 1로 설정해도 무방하다. 
 
-Pixi's `renderer` object will default to WebGL, which is good, because WebGL is
-incredibly fast, and lets you use some spectacular visual effects that
-you’ll learn all about ahead. The Canvas renderer was removed in version 5 and above, but Pixi provides a separate version named `pixi.js-legacy` which re-adds support for the canvas renderer should you need it.
+Pixi의 `renderer` 오브젝트는 WebGL을 기본으로 한다. 이것의 좋은 점은 WebGL이 매우 빠르고 여러분이 앞으로 배울 엄청난 비쥬얼 효과를 만들 수 있게끔 한다는 것이다. Canvas renderer (캔버스를 기반으로 하는 렌더러)는 버젼5 이상에서는 제거되었지만 `pixi.js-legacy`라는 버젼은 canvas renderer를 지원하고 있다.
 
-If you need to change the background color of the canvas after you’ve
-created it, set the `app.renderer` object’s `backgroundColor` property to
-any hexadecimal color value:
+캔버스를 생성한 후, 배경 색을 바꾸고 싶다면 `app.renderer` 오브젝트의 `backgroundColor` 프로퍼티를 다른 hexadecimal 색상 값으로 변경한다:
 ```js
 app.renderer.backgroundColor = 0x061639;
 ```
-If you want to find the width or the height of the `renderer`, use
-`app.renderer.view.width` and `app.renderer.view.height`.
+`renderer`의 너비와 높이값을 알고 싶다면 `app.renderer.view.width`와 `app.renderer.view.height`를 사용한다.
 
-To change the size of the canvas, use the `renderer`’s `resize`
-method, and supply any new `width` and `height` values. But, to make
-sure the canvas is resized to match the resolution, set `autoDensity`
-to `true`.
+캔버스 사이즈를 바꾸고 싶다면 `renderer`의 `resize` 메소드를 사용해서 새로운 `width`와 `height` 값을 넘겨준다. 이 때, 캔버스가 해상도에 알맞게 리사이즈 되게끔 하기 위해 `autoDensity` 값을 `true`로 지정한다.
 ```js
 app.renderer.autoDensity = true;
 app.renderer.resize(512, 512);
 ```
-If you want to make the canvas fill the entire window and adjust automatically if it is resized, you can use some CSS styling along with the `resizeTo` property, providing it an element to scale to, such as `window` as the value.
-`resizeTo` can also be passed with the rest of your options when creating your Pixi application.
+전체 창을 캔버스로 채우고 크기가 바뀔 때 자동으로 조정되게 하려면 `resizeTo` 프로퍼티에 (사이즈 조정의 기준이 될) `window` 같은 값을 넘겨주거나, 일부 CSS 스타일을 사용할 수 있다. 'resizeTo'는 픽시 애플리케이션을 만들 때 나머지 옵션과 함께 전달할 수도 있습니다. 
+
+Pixi application을 생성할 때 `resizeTo`를 다른 옵션(option)들과 함께 지정할 수도 있다.
+
 ```js
 app.renderer.view.style.position = "absolute";
 app.renderer.view.style.display = "block";
 app.renderer.autoDensity = true;
 app.resizeTo = window;
 ```
-But, if you do that, make sure you also set the default padding and
-margins to 0 on all your HTML elements with this bit of CSS code:
+그러나, 만약 당신이 그렇게 한다면, 이 CSS 코드와 함께 모든 HTML 요소에 기본 패딩과 마진을 0으로 설정해야 한다:
 ```html
 <style>* {padding: 0; margin: 0}</style>
 ```
-(The asterisk, *, in the code above, is the CSS "universal selector",
-which just means "all the tags in the HTML document".)
+(위 코드에 있는 별표, *,는 CSS에서 HTML의 모든 태그에 적용하는 "전체 선택자"를 의미한다.)
 
-If you want the canvas to scale proportionally to any browser window
-size, you can use [this custom `scaleToWindow` function](https://github.com/kittykatattack/scaleToWindow).
+어떤 브라우저 창 사이즈에도 캔버스가 비율적으로 리사이즈 되길 원한다면 [이 커스텀 `scaleToWindow` 함수](https://github.com/kittykatattack/scaleToWindow)를 사용할 수 있다.
 
 <a id='sprites'></a>
-Pixi sprites
+### Pixi 스프라이트
 ------------
 
 Now that you have a renderer, you can start adding images to it. Anything you want to be made visible in the renderer has to be added to a special Pixi object called the `stage`. You can access this special `stage` object like this:
